@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12 Week Muscle-Gain Program</title>
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap');
+
+  :root {
+    --accent: #E8A020;
+    --accent2: #E85D24;
+    --phase1: #2563EB;
+    --phase2: #7C3AED;
+    --phase3: #059669;
+    --card-bg: var(--color-background-primary);
+    --muted: var(--color-text-secondary);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .prog-wrap {
+    font-family: 'Barlow', sans-serif;
+    padding: 0 0 2rem;
+    max-width: 860px;
+  }
+
+  .prog-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 2rem 1.5rem 1.5rem;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 1.5rem;
+  }
+
+  .prog-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+
+  .prog-subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .prog-meta {
+    display: flex;
+    gap: 16px;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    background: rgba(255,255,255,0.1);
+    border: 0.5px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+
+  .meta-pill span { color: var(--accent); font-weight: 600; }
+
+  .phase-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .phase-btn {
+    padding: 8px 18px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: var(--card-bg);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .phase-btn:hover { background: var(--color-background-secondary); }
+  .phase-btn.active { color: #fff; border-color: transparent; }
+  .phase-btn.p1.active { background: var(--phase1); }
+  .phase-btn.p2.active { background: var(--phase2); }
+  .phase-btn.p3.active { background: var(--phase3); }
+
+  .phase-overview {
+    background: var(--card-bg);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .phase-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .p1-bg { background: var(--phase1); }
+  .p2-bg { background: var(--phase2); }
+  .p3-bg { background: var(--phase3); }
+
+  .phase-desc { font-size: 13px; color: var(--muted); line-height: 1.6; flex: 1; min-width: 200px; }
+  .phase-desc strong { color: var(--color-text-primary); font-weight: 500; }
+
+  .day-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .day-tabs::-webkit-scrollbar { display: none; }
+
+  .day-tab {
+    padding: 7px 14px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+
+  .day-tab:hover { border-color: var(--color-border-secondary); color: var(--color-text-primary); }
+  .day-tab.active { background: var(--color-text-primary); color: var(--color-background-primary); border-color: transparent; }
+  .day-tab.rest { opacity: 0.6; }
+  .day-tab.rest.active { background: var(--color-background-secondary); color: var(--muted); border-color: var(--color-border-secondary); }
+
+  .day-panel { display: none; }
+  .day-panel.active { display: block; }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .day-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .day-focus {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--color-background-secondary);
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 0.5px solid var(--color-border-tertiary);
+    font-weight: 500;
+  }
+
+  .warmup-box {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .warmup-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .warmup-list { list-style: none; }
+  .warmup-list li {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    padding: 2px 0;
+    display: flex;
+    gap: 8px;
+  }
+  .warmup-list li::before { content: '→'; color: var(--accent); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+
+  .exercise-card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+
+  .exercise-card:hover { border-color: var(--color-border-secondary); }
+
+  .ex-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .ex-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    width: 22px;
+    flex-shrink: 0;
+  }
+
+  .ex-info { flex: 1; min-width: 0; }
+
+  .ex-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ex-tags {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .tag-sets { background: rgba(37,99,235,0.1); color: #2563EB; }
+  .tag-reps { background: rgba(232,160,32,0.12); color: #B87A15; }
+  .tag-rest { background: rgba(var(--color-text-secondary-rgb, 120,120,120),0.1); color: var(--muted); }
+  .tag-super { background: rgba(232,93,36,0.1); color: var(--accent2); }
+  .tag-drop { background: rgba(124,58,237,0.1); color: #7C3AED; }
+  .tag-warm { background: rgba(5,150,105,0.1); color: var(--phase3); }
+
+  .ex-chevron {
+    color: var(--muted);
+    font-size: 12px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .ex-chevron.open { transform: rotate(180deg); }
+
+  .ex-details {
+    display: none;
+    padding: 0 1rem 0.9rem 2.25rem;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-secondary);
+  }
+
+  .ex-details.open { display: block; }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    padding: 0.75rem 0 0.5rem;
+  }
+
+  .detail-cell {
+    background: var(--card-bg);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 8px 10px;
+  }
+
+  .detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .detail-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+  }
+
+  .ex-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-top: 0.5rem;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin-top: 0.5rem;
+  }
+
+  .ex-note strong { color: var(--color-text-primary); font-weight: 500; }
+
+  .superset-connector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent2);
+  }
+
+  .superset-connector::before {
+    content: '';
+    width: 2px;
+    height: 16px;
+    background: var(--accent2);
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  .phase-note-box {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .pn-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .tip-card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 0.75rem 0.9rem;
+  }
+
+  .tip-icon { font-size: 18px; margin-bottom: 5px; }
+  .tip-label { font-size: 12px; font-weight: 500; margin-bottom: 3px; color: var(--color-text-primary); }
+  .tip-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  .rest-day-card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .prog-progression {
+    margin-top: 1rem;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .prog-progression strong { color: var(--color-text-primary); }
+
+  .week-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+
+  @media (max-width: 500px) {
+    .prog-title { font-size: 24px; }
+    .detail-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="prog-wrap">
+
+  <!-- Header -->
+  <div class="prog-header">
+    <div class="prog-title">12-WEEK MASS BUILDER</div>
+    <div class="prog-subtitle">Hypertrophy Program · Beginner–Intermediate</div>
+    <div class="prog-meta">
+      <div class="meta-pill"><span>6</span> days/week</div>
+      <div class="meta-pill"><span>3</span> phases · 4 weeks each</div>
+      <div class="meta-pill">Push · Pull · Legs · Rest · Upper · Lower</div>
+      <div class="meta-pill">Progressive Overload</div>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🍗</div>
+      <div class="tip-label">Nutrition</div>
+      <div class="tip-desc">Eat 300–500 cal surplus. Aim 1g protein per lb bodyweight daily. Don't neglect carbs — they fuel training.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💤</div>
+      <div class="tip-label">Sleep</div>
+      <div class="tip-desc">7–9 hours. Muscle is built during recovery, not in the gym. This is non-negotiable.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💧</div>
+      <div class="tip-label">Hydration</div>
+      <div class="tip-desc">3–4L water per day minimum. Performance drops fast when dehydrated.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📈</div>
+      <div class="tip-label">Progressive Overload</div>
+      <div class="tip-desc">Add 2.5–5kg to compound lifts every 1–2 weeks when you hit the top rep range with good form.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📓</div>
+      <div class="tip-label">Track Everything</div>
+      <div class="tip-desc">Log every set, rep, and weight. You cannot progress what you don't measure.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">⚠️</div>
+      <div class="tip-label">Ego-Free Zone</div>
+      <div class="tip-desc">Start lighter than you think. Form first, always. Injuries set you back months, not days.</div>
+    </div>
+  </div>
+
+  <!-- Phase Navigation -->
+  <div class="phase-nav">
+    <button class="phase-btn p1 active" onclick="setPhase(1)">Phase 1 — Weeks 1–4</button>
+    <button class="phase-btn p2" onclick="setPhase(2)">Phase 2 — Weeks 5–8</button>
+    <button class="phase-btn p3" onclick="setPhase(3)">Phase 3 — Weeks 9–12</button>
+  </div>
+
+  <!-- Phase Overviews -->
+  <div class="phase-overview" id="phase-overview">
+    <span class="phase-badge p1-bg">Phase 1</span>
+    <div class="phase-desc" id="phase-desc-text">
+      <strong>Foundation & Form (Weeks 1–4).</strong> Higher reps (10–15), moderate weight. Focus on mind-muscle connection, mastering movement patterns, and building work capacity. Rest 60–90s between sets. Every exercise should feel controlled — no momentum, no ego.
+      <div class="prog-progression" style="margin-top:8px">
+        <span class="week-badge" style="background:rgba(37,99,235,0.1);color:#2563EB">Week 1–2</span> Learn the movements. Use a weight where the last 2 reps of each set are challenging but form stays perfect.<br>
+        <span class="week-badge" style="background:rgba(37,99,235,0.1);color:#2563EB">Week 3–4</span> Add 2.5–5kg to compounds where form allows. Cables and machines: increase by 1 plate step.
+      </div>
+    </div>
+  </div>
+
+  <!-- Day Tabs -->
+  <div class="day-tabs" id="day-tabs">
+    <button class="day-tab active" onclick="setDay('mon')">Mon · Push</button>
+    <button class="day-tab" onclick="setDay('tue')">Tue · Pull</button>
+    <button class="day-tab" onclick="setDay('wed')">Wed · Legs</button>
+    <button class="day-tab rest" onclick="setDay('thu')">Thu · Rest</button>
+    <button class="day-tab" onclick="setDay('fri')">Fri · Upper</button>
+    <button class="day-tab" onclick="setDay('sat')">Sat · Lower</button>
+  </div>
+
+  <!-- DAY PANELS -->
+  <div id="day-panels">
+
+    <!-- MONDAY: PUSH -->
+    <div class="day-panel active" id="panel-mon">
+      <div class="day-header">
+        <div class="day-title">Monday — Push</div>
+        <div class="day-focus">Chest · Shoulders · Triceps</div>
+      </div>
+
+      <div class="warmup-box">
+        <div class="warmup-title">Warm-Up (10–12 min)</div>
+        <ul class="warmup-list">
+          <li>5 min light cardio (treadmill walk or bike) — raise heart rate</li>
+          <li>Arm circles: 15 reps forward + backward</li>
+          <li>Band pull-aparts or face pulls with light band: 2 × 20</li>
+          <li>Push-up with pause at bottom: 2 × 10 (activates chest & shoulders)</li>
+          <li>Rotator cuff external rotation with light band: 2 × 15 each arm</li>
+          <li><strong>Warm-up sets:</strong> For Bench Press — do 1×10 empty bar, 1×8 at 50% working weight, 1×4 at 75% working weight before your first working set</li>
+        </ul>
+      </div>
+
+      <div id="exs-mon"></div>
+    </div>
+
+    <!-- TUESDAY: PULL -->
+    <div class="day-panel" id="panel-tue">
+      <div class="day-header">
+        <div class="day-title">Tuesday — Pull</div>
+        <div class="day-focus">Back · Biceps · Rear Delts</div>
+      </div>
+
+      <div class="warmup-box">
+        <div class="warmup-title">Warm-Up (10–12 min)</div>
+        <ul class="warmup-list">
+          <li>5 min light cardio or rowing machine</li>
+          <li>Cat-cow stretches: 10 reps (mobilises thoracic spine)</li>
+          <li>Dead hang from pull-up bar: 30 seconds × 2 (decompresses spine, activates lats)</li>
+          <li>Scapular pull-ups: 2 × 10 (no elbow bend — pure scapular depression)</li>
+          <li>Light cable row: 2 × 15 (50% working weight — groove the movement)</li>
+          <li><strong>Warm-up sets:</strong> Lat Pulldown — 1×12 at 50% working weight, 1×8 at 70%</li>
+        </ul>
+      </div>
+
+      <div id="exs-tue"></div>
+    </div>
+
+    <!-- WEDNESDAY: LEGS -->
+    <div class="day-panel" id="panel-wed">
+      <div class="day-header">
+        <div class="day-title">Wednesday — Legs</div>
+        <div class="day-focus">Quads · Hamstrings · Glutes · Calves</div>
+      </div>
+
+      <div class="warmup-box">
+        <div class="warmup-title">Warm-Up (12–15 min)</div>
+        <ul class="warmup-list">
+          <li>5–7 min bike or treadmill incline walk</li>
+          <li>Bodyweight squats: 2 × 15 (feel the glutes and quads activating)</li>
+          <li>Hip circles: 10 each direction (hip flexor mobility)</li>
+          <li>Glute bridges on floor: 2 × 20 (activate posterior chain before loading)</li>
+          <li>Leg swings front/back: 15 each leg</li>
+          <li>Walking lunges: 2 × 10 each leg (dynamic warm-up)</li>
+          <li><strong>Warm-up sets:</strong> Hack Squat — 1×10 empty sled, 1×8 at 50% working weight</li>
+        </ul>
+      </div>
+
+      <div id="exs-wed"></div>
+    </div>
+
+    <!-- THURSDAY: REST -->
+    <div class="day-panel" id="panel-thu">
+      <div class="day-header">
+        <div class="day-title">Thursday — Rest / Light Jog</div>
+        <div class="day-focus">Active Recovery</div>
+      </div>
+
+      <div class="rest-day-card">
+        <div style="font-size:32px;margin-bottom:8px">🔄</div>
+        <div style="font-size:16px;font-weight:500;margin-bottom:8px">Recovery Day</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.8;max-width:480px;margin:0 auto">
+          This is where you actually grow. Your muscles repair during rest, not during lifting.<br><br>
+          <strong style="color:var(--color-text-primary)">Option A — Complete Rest:</strong> Light walking, stretching, foam rolling.<br>
+          <strong style="color:var(--color-text-primary)">Option B — Light Jog:</strong> 20–30 min easy-pace jog (65–70% max HR). Not a sprint session — you should be able to hold a conversation.<br><br>
+          <strong style="color:var(--color-text-primary)">Recommended:</strong> 10–15 min foam rolling session. Focus on quads, hamstrings, lats, and thoracic spine. This dramatically improves next-day performance.
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIDAY: UPPER -->
+    <div class="day-panel" id="panel-fri">
+      <div class="day-header">
+        <div class="day-title">Friday — Upper Body</div>
+        <div class="day-focus">Chest · Back · Shoulders · Arms</div>
+      </div>
+
+      <div class="warmup-box">
+        <div class="warmup-title">Warm-Up (10–12 min)</div>
+        <ul class="warmup-list">
+          <li>5 min bike or elliptical</li>
+          <li>Thoracic extension over foam roller: 60 seconds</li>
+          <li>Band pull-aparts: 2 × 20</li>
+          <li>Face pulls light cable: 2 × 15</li>
+          <li>Incline push-ups: 2 × 10</li>
+          <li><strong>Warm-up sets:</strong> Incline Barbell — 1×10 empty bar, 1×6 at 60% working weight</li>
+        </ul>
+      </div>
+
+      <div id="exs-fri"></div>
+    </div>
+
+    <!-- SATURDAY: LOWER -->
+    <div class="day-panel" id="panel-sat">
+      <div class="day-header">
+        <div class="day-title">Saturday — Lower Body</div>
+        <div class="day-focus">Glutes · Hamstrings · Quads · Calves</div>
+      </div>
+
+      <div class="warmup-box">
+        <div class="warmup-title">Warm-Up (12–15 min)</div>
+        <ul class="warmup-list">
+          <li>5–7 min rowing machine or bike</li>
+          <li>90/90 hip stretch: 60 sec each side</li>
+          <li>Banded clamshells: 2 × 20 each side (glute medius activation)</li>
+          <li>Single-leg glute bridges: 2 × 12 each leg</li>
+          <li>Bodyweight Romanian deadlift: 2 × 12 (groove hip hinge pattern)</li>
+          <li><strong>Warm-up sets:</strong> Hip Thrust — 2×10 bodyweight, 1×8 with empty bar before loading</li>
+        </ul>
+      </div>
+
+      <div id="exs-sat"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const PHASES = {
+  1: {
+    label: 'Phase 1',
+    colorClass: 'p1-bg',
+    desc: '<strong>Foundation & Form (Weeks 1–4).</strong> Higher reps (10–15), moderate weight. Focus on mind-muscle connection, mastering movement patterns, and building work capacity. Rest 60–90s between sets. Every exercise should feel controlled — no momentum, no ego.',
+    progression: '<span class="week-badge" style="background:rgba(37,99,235,0.1);color:#2563EB">Week 1–2</span> Learn the movements. Use a weight where the last 2 reps are challenging but form stays perfect.<br><span class="week-badge" style="background:rgba(37,99,235,0.1);color:#2563EB">Week 3–4</span> Add 2.5–5kg to compounds where form allows. Cables: increase by 1 plate step.'
+  },
+  2: {
+    label: 'Phase 2',
+    colorClass: 'p2-bg',
+    desc: '<strong>Volume & Strength (Weeks 5–8).</strong> Drop to 8–12 reps, increase weight significantly. Introduce more supersets and drop sets. Rest 90–120s between working sets. You should be lifting noticeably more than Phase 1 — this is where serious hypertrophy begins.',
+    progression: '<span class="week-badge" style="background:rgba(124,58,237,0.1);color:#7C3AED">Week 5–6</span> Bump weight 5–10% from Phase 1 final week. Focus on the eccentric (lowering) — 3 seconds down.<br><span class="week-badge" style="background:rgba(124,58,237,0.1);color:#7C3AED">Week 7–8</span> Try to increase weight on at least 2 exercises per session each week.'
+  },
+  3: {
+    label: 'Phase 3',
+    colorClass: 'p3-bg',
+    desc: '<strong>Intensity & Density (Weeks 9–12).</strong> Mixed rep ranges (6–15). Heavy compounds at 6–8 reps, isolation work at 12–15. Supersets and drop sets are standard. Rest 2 min on heavy sets. You\'re now training with real intensity — push hard, eat big, sleep hard.',
+    progression: '<span class="week-badge" style="background:rgba(5,150,105,0.1);color:#059669">Week 9–10</span> Increase compound weight 5–10% from Phase 2. Isolation exercises: increase by 1 step.<br><span class="week-badge" style="background:rgba(5,150,105,0.1);color:#059669">Week 11–12</span> Push to failure on last set of each exercise (with a spotter or using machines safely).'
+  }
+};
+
+const PHASE_EXERCISES = {
+  1: {
+    mon: [
+      {
+        name: 'Barbell Bench Press',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec',
+        weight: 'Start light — empty bar + 5–10kg each side. Add 2.5kg when you hit 15 reps on all 3 sets.',
+        warmup: '1×10 empty bar, 1×8 @ 50%, 1×4 @ 75%',
+        type: 'compound',
+        note: '<strong>Setup:</strong> Arch in lower back, shoulder blades pinched together. Bar at lower chest. Elbows 45–75° from body (not flared wide). Touch chest lightly — no bouncing. Drive through the whole palm.'
+      },
+      {
+        name: 'Incline Dumbbell Bench Press',
+        sets: '3 sets', reps: '12–15 reps', rest: '75 sec',
+        weight: 'Start: 2×8–12kg DBs. Increase by 2kg each side when form is solid.',
+        note: '<strong>Incline:</strong> 30–45°. Keep DBs in line with upper chest at bottom of rep. Slight inward arc at top — imagine you\'re hugging a barrel. Controlled lowering on every rep.'
+      },
+      {
+        name: 'Cable Fly Crossovers',
+        sets: '3 sets', reps: '12–15 reps', rest: '60 sec',
+        weight: 'Light — cables set at shoulder height. Focus: feel the stretch across the chest at full extension.',
+        super: 'Superset with Pec Deck',
+        superNote: 'Perform cable flies then immediately move to pec deck with no rest between. Rest 75 sec after completing both.',
+        note: '<strong>Form:</strong> Slight bend in elbow, hold throughout. Lean forward slightly. Think about bringing your elbows together, not your hands. Squeeze hard at the top for 1 sec.'
+      },
+      {
+        name: 'Butterfly / Pec Deck Machine',
+        sets: '3 sets', reps: '12–15 reps', rest: '75 sec (after superset)',
+        weight: 'Moderate machine weight. You should feel the pec stretch, not the shoulder.',
+        super: 'Part of superset with Cable Fly',
+        note: '<strong>Tip:</strong> Don\'t let the weight stack touch between reps — keep constant tension. Pause 1 sec at peak contraction. If you feel it in your front delts, the pads are too high.'
+      },
+      {
+        name: 'Seated Shoulder Press (Dumbbell or Machine)',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec',
+        weight: 'DBs: 8–14kg each. Machine: select moderate weight. Increase weekly.',
+        warmup: '1×15 light, 1×10 at 70%',
+        note: '<strong>Form:</strong> Elbows at 90° at bottom, don\'t let them drop below shoulder level. Press to just short of lockout — keeps tension on delts. Neutral grip DBs are easier on rotator cuff.'
+      },
+      {
+        name: 'Cable Lateral Raise',
+        sets: '3 sets', reps: '15 reps each arm', rest: '60 sec',
+        weight: 'Very light. Lateral raises are about form, not weight.',
+        super: 'Superset with Tricep Pushdown',
+        superNote: 'Lateral raise both arms (cable side raises or do one arm at a time) then immediately tricep pushdown. Rest 75 sec after both.',
+        note: '<strong>Setup:</strong> Cable at ankle height, pull across body. Raise to just below shoulder height — going higher traps the muscle. Lean slightly away from the cable. Pinky slightly higher than thumb at top.'
+      },
+      {
+        name: 'Tricep Pushdown (Cable, Rope or Bar)',
+        sets: '3 sets', reps: '12–15 reps', rest: '75 sec (after superset)',
+        weight: 'Light-moderate. Elbows pinned to sides throughout.',
+        super: 'Part of superset with Cable Lateral Raise',
+        note: '<strong>Tip:</strong> Full extension at bottom — spread rope apart slightly for extra squeeze. Don\'t let elbows flare or drift forward. Upper arm should stay completely still. Slow on the way back up.'
+      }
+    ],
+    tue: [
+      {
+        name: 'Lat Pulldown (Cable, Wide Grip)',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec',
+        weight: 'Start moderate — you should feel the lats pulling down, not just your arms.',
+        warmup: '1×12 @ 50%, 1×8 @ 70%',
+        note: '<strong>Form:</strong> Lean back 10–15° from vertical. Pull bar to upper chest, not behind neck. Drive elbows down and back — think "elbows to back pockets". Stretch arms fully at top. Don\'t swing.'
+      },
+      {
+        name: 'Reverse Grip Lat Pulldown (Cable)',
+        sets: '3 sets', reps: '12–15 reps', rest: '75 sec',
+        weight: 'Same or slightly less than wide grip. Supinated grip shifts emphasis to lower lats and biceps.',
+        note: '<strong>Tip:</strong> Keep elbows close to body as you pull. Lower bar to chin, elbows driving toward your hips. Reverse grip hits lower lat fibres and bicep synergistically — great for width and thickness.'
+      },
+      {
+        name: 'Dumbbell Row',
+        sets: '3 sets', reps: '12 reps each arm', rest: '75 sec',
+        weight: 'Moderate heavy DB. Use a bench or brace on the rack.',
+        note: '<strong>Form:</strong> Hinge at hip, back flat and parallel to floor. Pull DB to hip, not shoulder. Let the shoulder blade fully protract at bottom and fully retract at top — this range of motion is what builds the back. Pause 1 sec at top.'
+      },
+      {
+        name: 'Face Pull (Cable)',
+        sets: '3 sets', reps: '15–20 reps', rest: '60 sec',
+        weight: 'Light. Shoulder health exercise — never ego-lift face pulls.',
+        super: 'Superset with Rear Delt Cable Fly',
+        superNote: 'Face pull then immediately rear delt cable fly. Rest 75 sec after both.',
+        note: '<strong>Setup:</strong> Cable at forehead height, rope attachment. Pull to forehead level, flare elbows high, externally rotate at end position. This exercise bulletproofs your shoulders and balances pressing volume. Do it every push AND pull day if possible.'
+      },
+      {
+        name: 'Rear Delt Reverse Fly (Cable)',
+        sets: '3 sets', reps: '15 reps', rest: '75 sec (after superset)',
+        weight: 'Very light cables crossed in front of body. Quality over quantity.',
+        super: 'Part of superset with Face Pull',
+        note: '<strong>Form:</strong> Cross cables, grab opposite handles. Lean slightly forward. Arms slightly bent — fly out and up. Don\'t shrug or use momentum. Rear delts are often the weakest muscle on beginners — train them properly.'
+      },
+      {
+        name: 'Seated Incline Dumbbell Curl',
+        sets: '3 sets', reps: '10–12 reps each arm', rest: '60 sec',
+        weight: 'Light-moderate DBs. Incline position stretches the long head of bicep — superior growth stimulus.',
+        note: '<strong>Setup:</strong> Bench at 45–60°. Arms hang behind torso at the bottom. Curl up supinating the wrist. Do not swing — the whole point of this exercise is the stretched position. Very slow eccentric (3 seconds down).'
+      },
+      {
+        name: 'Machine Preacher Curl',
+        sets: '3 sets', reps: '12–15 reps', rest: '60 sec',
+        weight: 'Moderate machine weight. Last set: drop weight 30% for a drop set of 8–10 reps.',
+        drop: 'Drop set on last set',
+        note: '<strong>Tip:</strong> Don\'t lean back off the pad. Full range of motion — all the way down (fully extended) and squeeze at top. Machines are great here because the resistance curve is optimised.'
+      }
+    ],
+    wed: [
+      {
+        name: 'Hack Squat (Machine)',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec',
+        weight: 'Start lighter than you think — get depth right first. Add 5–10kg each side when form is solid.',
+        warmup: '1×10 empty sled, 1×8 @ 50%',
+        note: '<strong>Form:</strong> Feet shoulder-width on the plate, toes slightly out. Drop to 90° minimum — parallel or below. Drive through the whole foot, especially the heels. Knees track over toes. Controlled lowering — 2 seconds down.'
+      },
+      {
+        name: 'Romanian Deadlift (Barbell)',
+        sets: '3 sets', reps: '10–12 reps', rest: '90 sec',
+        weight: 'Moderate barbell. Hip hinge movement — hamstrings should be burning by end of set.',
+        warmup: '1×10 empty bar, 1×8 @ 60%',
+        note: '<strong>Form:</strong> Push hips back, not down. Soft bend in knees. Bar stays close to legs (nearly scraping shins). Lower until you feel a deep hamstring stretch — usually mid-shin or lower. Don\'t round lower back. Drive hips forward to stand.'
+      },
+      {
+        name: 'Leg Extension (Machine)',
+        sets: '3 sets', reps: '15 reps', rest: '60 sec',
+        super: 'Superset with Lying Leg Curl',
+        superNote: 'Leg extension then immediately lying leg curl. Rest 90 sec after both.',
+        note: '<strong>Tip:</strong> Pause at full extension for 1 second squeeze. Toes pointed slightly inward emphasises inner quad (vastus medialis). Don\'t use momentum — pure quad contraction. Last set: drop set — reduce weight 25% and continue to failure.'
+      },
+      {
+        name: 'Lying Leg Curl (Machine)',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec (after superset)',
+        weight: 'Moderate machine weight. Hamstrings and glutes should be working together.',
+        super: 'Part of superset with Leg Extension',
+        drop: 'Drop set on last set',
+        note: '<strong>Form:</strong> Keep hips down throughout — don\'t let them rise off the pad. Full range of motion. Pause at peak contraction. Lying version allows greater hip extension which fully lengthens the hamstring. Last set: drop set.'
+      },
+      {
+        name: 'Bulgarian Split Squat (Bodyweight to Dumbbells)',
+        sets: '3 sets', reps: '10 reps each leg', rest: '75 sec',
+        weight: 'Start bodyweight Phase 1. Add 5kg DBs each hand in Phase 2.',
+        note: '<strong>Form:</strong> Rear foot elevated on bench. Front foot far enough forward that your shin stays vertical when the knee tracks over toes. Lower straight down — don\'t lean forward. Most people hate these. That\'s because they work. Excellent glute and quad builder.'
+      },
+      {
+        name: 'Calf Press (Machine)',
+        sets: '4 sets', reps: '15–20 reps', rest: '60 sec',
+        weight: 'Moderate-heavy. Full range of motion — full stretch at bottom, full rise at top.',
+        note: '<strong>Tip:</strong> Calves are stubbornly slow to grow. Train them through full range, with a 2 sec pause at the bottom stretch. Alternate: 2 sets straight toes (gastrocnemius), 2 sets toes pointed out (soleus). Phase 3: add 1 drop set per session.'
+      }
+    ],
+    thu: [],
+    fri: [
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec',
+        weight: 'Start lighter than flat bench — incline is harder. Empty bar + 5kg each side initially.',
+        warmup: '1×10 empty bar, 1×6 @ 60%',
+        note: '<strong>Setup:</strong> Bench at 30–45°. Bar hits upper chest. Elbows at 75°. Full range of motion. Upper chest is often underdeveloped in beginners — prioritise this movement. Pause briefly at bottom to eliminate bounce.'
+      },
+      {
+        name: 'Pull-Ups (Assisted if needed)',
+        sets: '3 sets', reps: 'Max reps (aim 6–10)', rest: '90 sec',
+        weight: 'Bodyweight. Use assisted machine if less than 5 reps. Add band assistance as needed.',
+        note: '<strong>Form:</strong> Dead hang start — full arm extension. Pull until chin clears bar or chest touches bar. Don\'t kip or swing in Phase 1. 3 sec lowering on each rep. If you can\'t do 5, use the assisted pull-up machine until you build strength.'
+      },
+      {
+        name: 'Dumbbell Bench Press',
+        sets: '3 sets', reps: '12 reps', rest: '75 sec',
+        weight: 'Moderate DBs (similar to incline DB weight). Greater ROM than barbell.',
+        note: '<strong>Tip:</strong> Greater range of motion than barbell — let the DBs come lower at the bottom. Neutral to slight pronation at top. Keep shoulder blades retracted throughout. Good for fixing strength imbalances between sides.'
+      },
+      {
+        name: 'Close Grip Lat Pulldown (Cable)',
+        sets: '3 sets', reps: '12–15 reps', rest: '75 sec',
+        weight: 'Similar to wide grip but slightly more weight. Grip emphasises lower lat and bicep.',
+        note: '<strong>Form:</strong> Neutral grip (palms facing each other). Pull to chin level. Elbows drive toward hips, not just backward. Close grip allows slightly greater squeeze at bottom of rep.'
+      },
+      {
+        name: 'Single Arm Lat Pulldown (Cable)',
+        sets: '3 sets', reps: '12 reps each arm', rest: '60 sec',
+        super: 'Superset with Seated Cable Row',
+        superNote: 'Single arm pulldown (both sides) then immediately seated cable row. Rest 90 sec after.',
+        note: '<strong>Tip:</strong> Unilateral work exposes imbalances. Keep your torso still — don\'t rotate. Full stretch at top, full contraction at bottom. Helps build the mind-muscle connection for lats.'
+      },
+      {
+        name: 'Seated Cable Row (V-Grip)',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec (after superset)',
+        weight: 'Moderate weight. Sit tall, don\'t use back momentum.',
+        super: 'Part of superset with Single Arm Pulldown',
+        note: '<strong>Form:</strong> Chest up, slight forward lean before the pull. Pull V-grip to lower sternum, drive elbows back. Squeeze shoulder blades together at the end. Let the weight pull you forward slowly to get the stretch — this stretch is where growth happens.'
+      },
+      {
+        name: 'Dips (Chest or Tricep focus)',
+        sets: '3 sets', reps: '10–15 reps', rest: '75 sec',
+        weight: 'Bodyweight. Use assisted dips machine if less than 8 reps.',
+        note: '<strong>Chest dips:</strong> Lean forward 30°, elbows flared slightly — feel stretch in chest. <strong>Tricep dips:</strong> Upright torso, elbows close to body. Aim for both versions across your training week. Full range of motion every rep.'
+      },
+      {
+        name: 'Hammer Curl (Dumbbell)',
+        sets: '3 sets', reps: '12 reps each arm', rest: '60 sec',
+        super: 'Superset with Face Pull',
+        superNote: 'Hammer curl then immediately face pull. Rest 75 sec after both.',
+        note: '<strong>Tip:</strong> Neutral grip (thumbs up). Targets brachialis and brachioradialis — the muscles that add thickness to the arm. Alternate arms or do both together. Don\'t swing. Great for overall arm width.'
+      },
+      {
+        name: 'Face Pull (Cable)',
+        sets: '3 sets', reps: '15–20 reps', rest: '75 sec (after superset)',
+        weight: 'Light. Shoulder health and rear delt work.',
+        super: 'Part of superset with Hammer Curl',
+        note: '<strong>Reminder:</strong> Face pulls every session — push AND pull days. Your shoulders will thank you. Always keep the weight light enough to maintain perfect form. Elbows high, external rotation at end position.'
+      }
+    ],
+    sat: [
+      {
+        name: 'Hip Thrust (Barbell)',
+        sets: '3 sets', reps: '12–15 reps', rest: '90 sec',
+        weight: 'Start empty bar. Add 10–20kg once comfortable. This will become a heavy lift.',
+        warmup: '2×10 bodyweight, 1×8 empty bar',
+        note: '<strong>Setup:</strong> Upper back on bench, bar over hip crease with pad. Feet flat, shoulder-width, toes slightly out. Drive through heels, squeeze glutes at top — full hip extension. Chin tucked to chest. The best glute builder in existence. Phase 2: aim for 60–100kg.'
+      },
+      {
+        name: 'Romanian Deadlift (Barbell)',
+        sets: '3 sets', reps: '10–12 reps', rest: '90 sec',
+        weight: 'Moderate weight. Second RDL of the week — use same weight as Wednesday initially.',
+        note: '<strong>Focus:</strong> Saturday RDL is about glute development more than Wednesday\'s. Consciously squeeze glutes at the top of every rep. Keep the bar as close to your body as possible throughout the movement.'
+      },
+      {
+        name: 'Bulgarian Split Squat (Weighted)',
+        sets: '3 sets', reps: '10 reps each leg', rest: '75 sec',
+        weight: 'Add DBs in Phase 1 if bodyweight is comfortable. 5–10kg each hand.',
+        note: '<strong>Progression:</strong> Phase 1 — bodyweight to light DBs. Phase 2 — 10–15kg DBs. Phase 3 — 15–25kg DBs or barbell on back. One of the hardest single-leg movements. Builds glutes, quads, and hip stability simultaneously.'
+      },
+      {
+        name: 'Lying Leg Curl (Machine)',
+        sets: '3 sets', reps: '12–15 reps', rest: '75 sec',
+        weight: 'Moderate. Second hamstring session of the week.',
+        note: '<strong>Tip:</strong> You\'re training hamstrings twice this week (Wednesday + Saturday) — Saturday is slightly lighter/higher reps for volume. Focus on the stretch at the bottom of each rep. Great for thickness through the back of the thigh.'
+      },
+      {
+        name: 'Leg Extension (Machine)',
+        sets: '3 sets', reps: '15 reps', rest: '60 sec',
+        drop: 'Drop set on last set',
+        note: '<strong>Last set drop set:</strong> Complete 15 reps, immediately reduce weight 30%, continue to failure. Quads will be burning. This is the goal. Saturday leg extension is slightly lighter/higher rep than Wednesday to balance recovery.'
+      },
+      {
+        name: 'Calf Press (Machine)',
+        sets: '3 sets', reps: '15–20 reps', rest: '60 sec',
+        note: '<strong>Second calf session of the week:</strong> Frequency is key for calves. Keep full range of motion. If calves are a priority, add a 4th set here in Phase 2 and 3.'
+      }
+    ]
+  }
+};
+
+// Populate Phase 2 and 3 with updated reps/weight
+function getExercises(phase, day) {
+  const base = PHASE_EXERCISES[1][day];
+  if (!base) return [];
+  return base.map(ex => {
+    let override = {};
+    if (phase === 2) {
+      override.sets = ex.sets.replace('3 sets', '4 sets').replace('4 sets','4 sets');
+      override.reps = ex.reps.replace('12–15', '10–12').replace('15–20','12–15').replace('15 reps','12 reps').replace('12 reps','10–12 reps');
+      override.phaseNote = 'Phase 2: Increase weight 10–20% from Phase 1. Add drop set on last set of isolation exercises. Rest 90–120s between sets.';
+    } else if (phase === 3) {
+      override.sets = '4 sets';
+      override.reps = ex.reps.replace('12–15','8–12').replace('15–20','12–15').replace('15 reps','10–12 reps').replace('12 reps','8–10 reps');
+      override.phaseNote = 'Phase 3: Heavier compounds at 6–8 reps on first set, 8–12 on subsequent sets. Push to failure on last set. Supersets and drop sets are standard.';
+    }
+    return { ...ex, ...override };
+  });
+}
+
+function renderExercises(day, phase) {
+  const exs = getExercises(phase, day);
+  const container = document.getElementById('exs-' + day);
+  if (!container) return;
+  if (!exs || exs.length === 0) { container.innerHTML = ''; return; }
+
+  let html = '';
+  exs.forEach((ex, i) => {
+    const hasDrop = ex.drop;
+    const hasSuper = ex.super;
+    const hasWarmup = ex.warmup;
+    const hasPhaseNote = ex.phaseNote;
+
+    html += `<div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <div class="ex-num">${i + 1}</div>
+        <div class="ex-info">
+          <div class="ex-name">${ex.name}</div>
+          <div class="ex-tags">
+            <span class="tag tag-sets">${ex.sets}</span>
+            <span class="tag tag-reps">${ex.reps}</span>
+            ${ex.rest ? `<span class="tag tag-rest">Rest: ${ex.rest}</span>` : ''}
+            ${hasSuper ? '<span class="tag tag-super">Superset</span>' : ''}
+            ${hasDrop ? '<span class="tag tag-drop">Drop Set</span>' : ''}
+            ${hasWarmup ? '<span class="tag tag-warm">Warm-up Sets</span>' : ''}
+          </div>
+        </div>
+        <div class="ex-chevron">▼</div>
+      </div>
+      <div class="ex-details">
+        <div class="detail-grid">
+          <div class="detail-cell"><div class="detail-label">Sets</div><div class="detail-val">${ex.sets}</div></div>
+          <div class="detail-cell"><div class="detail-label">Reps</div><div class="detail-val">${ex.reps}</div></div>
+          ${ex.rest ? `<div class="detail-cell"><div class="detail-label">Rest</div><div class="detail-val">${ex.rest}</div></div>` : ''}
+          ${ex.weight ? `<div class="detail-cell" style="grid-column:1/-1"><div class="detail-label">Weight Guidance</div><div class="detail-val">${ex.weight}</div></div>` : ''}
+          ${hasWarmup ? `<div class="detail-cell" style="grid-column:1/-1"><div class="detail-label">Warm-up Sets</div><div class="detail-val">${ex.warmup}</div></div>` : ''}
+          ${hasSuper ? `<div class="detail-cell" style="grid-column:1/-1;border-left:2px solid #E85D24"><div class="detail-label" style="color:#E85D24">Superset</div><div class="detail-val" style="font-size:12px">${ex.superNote || ex.super}</div></div>` : ''}
+          ${hasDrop ? `<div class="detail-cell" style="grid-column:1/-1;border-left:2px solid #7C3AED"><div class="detail-label" style="color:#7C3AED">Drop Set</div><div class="detail-val" style="font-size:12px">Immediately reduce weight 25–30% after last working set and continue to failure.</div></div>` : ''}
+          ${hasPhaseNote ? `<div class="detail-cell" style="grid-column:1/-1;background:var(--color-background-info);border-color:var(--color-border-info)"><div class="detail-label" style="color:var(--color-text-info)">Phase Note</div><div class="detail-val" style="font-size:12px;color:var(--color-text-info)">${ex.phaseNote}</div></div>` : ''}
+        </div>
+        ${ex.note ? `<div class="ex-note">${ex.note}</div>` : ''}
+      </div>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function toggleEx(header) {
+  const details = header.nextElementSibling;
+  const chev = header.querySelector('.ex-chevron');
+  const isOpen = details.classList.contains('open');
+  details.classList.toggle('open', !isOpen);
+  chev.classList.toggle('open', !isOpen);
+}
+
+let currentPhase = 1;
+let currentDay = 'mon';
+
+function setPhase(p) {
+  currentPhase = p;
+  document.querySelectorAll('.phase-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', (i + 1) === p);
+  });
+  const data = PHASES[p];
+  document.querySelector('.phase-badge').className = 'phase-badge ' + data.colorClass;
+  document.querySelector('.phase-badge').textContent = data.label;
+  document.getElementById('phase-desc-text').innerHTML = data.desc + '<div class="prog-progression" style="margin-top:8px">' + data.progression + '</div>';
+  ['mon','tue','wed','thu','fri','sat'].forEach(d => renderExercises(d, p));
+}
+
+function setDay(day) {
+  currentDay = day;
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + day).classList.add('active');
+}
+
+// Init
+['mon','tue','wed','thu','fri','sat'].forEach(d => renderExercises(d, 1));
+</script>
+</body>
+</html>
