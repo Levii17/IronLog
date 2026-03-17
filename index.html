@@ -1011,5 +1011,10 @@ function setDay(day) {
 // Init
 ['mon','tue','wed','thu','fri','sat'].forEach(d => renderExercises(d, 1));
 </script>
+  <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
 </body>
 </html>
